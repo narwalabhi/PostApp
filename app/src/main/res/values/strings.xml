@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="already_registered_sing_in_here">Already Registered? Sing in here</string>
+    <string name="register">Register</string>
+    <string name="password">Password</string>
+    <string name="sign_in">SIGN In</string>
+    <string name="email">Email</string>
+    <string name="log_out">log out</string>
+    <string name="name">Name :</string>
+    <string name="username">Username</string>
+    <string name="dob">DOB :</string>
+    <string name="mobile">Mobile :</string>
+    <string name="emailProfile">Email :</string>
+    <string name="profilePic">Profile Picture</string>
+    <string name="title_activity_postt">PosttActivity</string>
+    <string name="full_name">Full Name</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
+    <string name="title_activity_home2">Home2Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="add_post">Add Post</string>
+    <string name="profile">Profile</string>
+    <string name="file_key">user_prefs</string>
+    <string name="pref_user_img_url">image_url</string>
+    <string name="pre_username">username</string>
+    <string name="get_in">Get IN!</string>
+</resources>
