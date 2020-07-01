@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,8 +37,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostViewHolder> {
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = layoutInflater.inflate(R.layout.post_list_item, parent,false);
-        PostViewHolder postViewHolder = new PostViewHolder(v);
-        return postViewHolder;
+        return new PostViewHolder(v);
     }
 
     @Override
@@ -61,6 +61,14 @@ public class PostListAdapter extends RecyclerView.Adapter<PostViewHolder> {
                 .resize(102, 102)
                 .centerCrop()
                 .into(postViewHolder.cIvUserProPic);
+        postViewHolder.postCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, PostViewActivity.class);
+                intent.putExtra("post",post);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

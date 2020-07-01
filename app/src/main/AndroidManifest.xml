@@ -15,15 +15,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".PostViewActivity"
+            android:label="@string/title_activity_post_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <service
             android:name=".FCMService"
-            android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:windowSoftInputMode="adjustPan|adjustResize"></activity>
+            android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

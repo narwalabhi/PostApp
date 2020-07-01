@@ -55,6 +55,7 @@ import static android.Manifest.permission.CAMERA;
 public class AddPostFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "profileSetup";
+    private boolean uploadComplete = false;
     TextInputEditText etTopic;
     TextInputEditText etContent;
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -94,7 +95,7 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    private void uploadPicture() throws FileNotFoundException {
+    private void uploadPicture() {
         StorageReference mStorageReference;
         if (ImageUri != null) {
             Cursor returnCursor = requireActivity().getContentResolver().query(ImageUri, null, null, null, null);
@@ -127,6 +128,7 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     postImgUrl = uri.toString();
+                                    uploadComplete = true;
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -146,67 +148,66 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case PICK_IMAGE_REQUEST: {
-                if (resultCode == Activity.RESULT_OK) {
-                    if (data != null) {
-                        ImageUri = data.getData();
-                    }
-                    try {
-                        uploadPicture();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+        if (requestCode == PICK_IMAGE_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    ImageUri = data.getData();
                 }
+                uploadPicture();
             }
         }
     }
 
     private void addPost() {
-        String postContent = Objects.requireNonNull(etContent.getText()).toString();
-        String postTitle = Objects.requireNonNull(etTopic.getText()).toString();
-        SharedPreferences preferences = requireContext().getSharedPreferences(String.valueOf(R.string.file_key), Context.MODE_PRIVATE);
-        String username = preferences.getString("username", null);
-        String userImgUrl = preferences.getString("imgUrl", null);
-        if (!postContent.equals("") && !postTitle.equals("")) {
-            etContent.setText("");
-            etTopic.setText("");
-            String userId = firebaseUser.getUid();
-            Post post = new Post(userId, postContent, username, userImgUrl, postTitle, postImgUrl);
-            String postID = db.collection("posts").document().getId();
-            db.collection("posts")
-                    .document(postID)
-                    .set(post)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Log.d(TAG, "onSuccess: ");
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.d(TAG, "onFailure: " + e.getMessage());
-                        }
-                    });
-            DocumentReference userRef = db.collection("users").document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()));
-            userRef.update("postIds", FieldValue.arrayUnion(postID))
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.d(TAG, "onFailure: " + e.getMessage());
-                }
-            });
-            userRef.update("postCount", FieldValue.increment(1))
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.d(TAG, "onFailure: " + e.getMessage());
-                }
-            });
+        if(uploadComplete && !postImgUrl.equals("")){
+            String postContent = Objects.requireNonNull(etContent.getText()).toString();
+            String postTitle = Objects.requireNonNull(etTopic.getText()).toString();
+            SharedPreferences preferences = requireContext().getSharedPreferences(String.valueOf(R.string.file_key), Context.MODE_PRIVATE);
+            String username = preferences.getString("username", null);
+            String userImgUrl = preferences.getString("imgUrl", null);
+            if (!postContent.equals("") && !postTitle.equals("")) {
+                etContent.setText("");
+                etTopic.setText("");
+                String userId = firebaseUser.getUid();
+                Post post = new Post(userId, postContent, username, userImgUrl, postTitle, postImgUrl);
+                String postID = db.collection("posts").document().getId();
+                db.collection("posts")
+                        .document(postID)
+                        .set(post)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "onSuccess: ");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d(TAG, "onFailure: " + e.getMessage());
+                            }
+                        });
+                DocumentReference userRef = db.collection("users").document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()));
+                userRef.update("postIds", FieldValue.arrayUnion(postID))
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d(TAG, "onFailure: " + e.getMessage());
+                            }
+                        });
+                userRef.update("postCount", FieldValue.increment(1))
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d(TAG, "onFailure: " + e.getMessage());
+                            }
+                        });
+            }else{
+                Toast.makeText(requireContext(), "Please Ddon't leave the fields empty", Toast.LENGTH_SHORT).show();
+            }
         }else{
-            Toast.makeText(requireContext(), "Please Ddon't leave the fields empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Wait for the image to upload.", Toast.LENGTH_SHORT).show();
         }
+
     }
 
 }

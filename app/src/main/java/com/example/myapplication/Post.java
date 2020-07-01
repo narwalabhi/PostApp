@@ -1,13 +1,14 @@
 package com.example.myapplication;
 
-import com.google.firebase.database.Exclude;
 
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Post {
+public class Post implements Serializable {
     private String UserId;
     private String content;
     private String Username;
@@ -126,22 +127,6 @@ public class Post {
         return Username;
     }
 
-//    @Exclude
-//    public Map<String, Object> toMap() {
-//        HashMap<String, Object> result = new HashMap<>();
-//        result.put("userID", this.getUserId());
-//        result.put("username", this.getUsername());
-//        result.put("content", this.getContent());
-//        result.put("topic",this.title);
-//        result.put("userImageName", this.getUserImageUrl());
-//        result.put("likeCount",this.likeCount);
-//        result.put("dislikeCount",this.dislikeCount);
-//        result.put("commentCount",this.commentCount);
-//        result.put("likedIds", this.likedIds);
-//        result.put("dislikedIds",this.dislikedIds);
-//        result.put("comments",comments);
-//        return result;
-//    }
 
     public List<String> getLikedIds() {
         return likedIds;

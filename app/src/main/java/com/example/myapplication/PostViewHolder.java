@@ -6,6 +6,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
@@ -13,6 +14,7 @@ import com.google.android.material.textview.MaterialTextView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PostViewHolder extends RecyclerView.ViewHolder {
+    CardView postCardView;
     MaterialTextView tvPostContent, tvPostTitle, tvUsername;
     TextView tvNoOfLikes, tvNoOfDislikes, tvNoOfComments;
     CircleImageView cIvUserProPic;
@@ -21,6 +23,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
 
     public PostViewHolder(View view) {
         super(view);
+        postCardView = view.findViewById(R.id.postCardView);
         tvUsername = view.findViewById(R.id.tvPostUsername);
         tvPostContent = view.findViewById(R.id.tvContent);
         cIvUserProPic = view.findViewById(R.id.ivPostProfilePic);
@@ -32,5 +35,6 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         tvNoOfComments = view.findViewById(R.id.tvNoOfComments);
         ivPostPic = view.findViewById(R.id.ivPostPic);
         tvPostTitle = view.findViewById(R.id.tvTitle);
+
     }
 }
