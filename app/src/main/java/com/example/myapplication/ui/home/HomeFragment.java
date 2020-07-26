@@ -36,6 +36,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class HomeFragment extends Fragment {
 
@@ -54,12 +55,12 @@ public class HomeFragment extends Fragment {
         PostList.setLayoutManager(new LinearLayoutManager(requireContext()));
         PostList.setAdapter(postListAdapter);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        CollectionReference documentReference = db.collection("posts");
-        documentReference.get()
+        CollectionReference collectionReference = db.collection("posts");
+        collectionReference.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                        for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(task.getResult())) {
                             Post post = documentSnapshot.toObject(Post.class);
                             posts.add(post);
                         }

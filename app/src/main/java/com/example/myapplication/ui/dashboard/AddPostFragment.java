@@ -169,8 +169,8 @@ public class AddPostFragment extends Fragment implements View.OnClickListener {
                 etContent.setText("");
                 etTopic.setText("");
                 String userId = firebaseUser.getUid();
-                Post post = new Post(userId, postContent, username, userImgUrl, postTitle, postImgUrl);
                 String postID = db.collection("posts").document().getId();
+                Post post = new Post(postID, userId, postContent, username, userImgUrl, postTitle, postImgUrl);
                 db.collection("posts")
                         .document(postID)
                         .set(post)

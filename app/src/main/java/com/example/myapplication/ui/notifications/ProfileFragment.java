@@ -62,7 +62,7 @@ public class ProfileFragment extends Fragment {
         tvUsername.setText(userPrefs.getString("username", null));
         Picasso.get()
                 .load(userPrefs.getString("imgUrl", null))
-                .rotate(-90f)
+//                .rotate(-90f)
                 .resize(250, 250)
                 .centerCrop()
                 .into(ivProPic);

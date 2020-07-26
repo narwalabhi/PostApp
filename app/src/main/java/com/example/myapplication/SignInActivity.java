@@ -96,7 +96,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 if (task.isSuccessful()) {
                     setPrefs();
                     Toast.makeText(SignInActivity.this, "Sign in successful", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 } else if (!task.isSuccessful()) {
                     Toast.makeText(SignInActivity.this, "Sign in unsuccessful", Toast.LENGTH_SHORT).show();
                 }
@@ -185,4 +187,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

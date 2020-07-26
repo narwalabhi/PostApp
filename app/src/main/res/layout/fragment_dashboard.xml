@@ -22,7 +22,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextInputLayoutTopic"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -37,6 +37,7 @@
             android:id="@+id/etTopic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:hint="Topic"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF" />
@@ -44,7 +45,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TexInputLayoutContent"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -58,6 +59,7 @@
             android:id="@+id/etContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/endColor"
             android:gravity="start"
             android:hint="Content"
             android:textColor="#FFFFFF"

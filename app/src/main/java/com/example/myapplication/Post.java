@@ -4,41 +4,36 @@ package com.example.myapplication;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Post implements Serializable {
+    private String postId;
     private String UserId;
     private String content;
     private String Username;
     private String UserImageUrl;
     private String postImageUrl;
     private List<String> likedIds;
-    private List<String> dislikedIds;
-    private List<String> comments;
+    private ArrayList<Comment> comments;
     private int commentCount;
     private String title;
     private int likeCount;
-    private int dislikeCount;
 
     public Post() {
         //empty constructor
     }
 
-
-    public Post(String userId, String content, String username, String userImageUrl, String title, String postImageUrl) {
+    public Post(String postId, String userId, String content, String username, String userImageUrl, String title, String postImageUrl) {
         UserId = userId;
+        this.postId = postId;
         this.content = content;
         Username = username;
         UserImageUrl = userImageUrl;
         this.title = title;
         this.likeCount = 0;
-        this.dislikeCount = 0;
         this.commentCount = 0;
         this.postImageUrl = postImageUrl;
         likedIds = new ArrayList<>();
-        dislikedIds = new ArrayList<>();
         comments = new ArrayList<>();
     }
 
@@ -66,15 +61,12 @@ public class Post implements Serializable {
         this.postImageUrl = postImageUrl;
     }
 
-    public void setLikedIds(List<String> likedIds) {
+    public void setLikedIds(ArrayList<String> likedIds) {
         this.likedIds = likedIds;
     }
 
-    public void setDislikedIds(List<String> dislikedIds) {
-        this.dislikedIds = dislikedIds;
-    }
 
-    public void setComments(List<String> comments) {
+    public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
     }
 
@@ -90,8 +82,14 @@ public class Post implements Serializable {
         this.likeCount = likeCount;
     }
 
-    public void setDislikeCount(int dislikeCount) {
-        this.dislikeCount = dislikeCount;
+
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
     }
 
     @Override
@@ -102,12 +100,10 @@ public class Post implements Serializable {
                 ", Username='" + Username + '\'' +
                 ", UserImageName='" + UserImageUrl + '\'' +
                 ", likedIds=" + likedIds +
-                ", dislikedIds=" + dislikedIds +
                 ", comments=" + comments +
                 ", commentCount=" + commentCount +
                 ", topic='" + title + '\'' +
                 ", likeCount=" + likeCount +
-                ", dislikeCount=" + dislikeCount +
                 '}';
     }
 
@@ -132,11 +128,8 @@ public class Post implements Serializable {
         return likedIds;
     }
 
-    public List<String> getDislikedIds() {
-        return dislikedIds;
-    }
 
-    public List<String> getComments() {
+    public ArrayList<Comment> getComments() {
         return comments;
     }
 
@@ -152,7 +145,4 @@ public class Post implements Serializable {
         return likeCount;
     }
 
-    public int getDislikeCount() {
-        return dislikeCount;
-    }
 }
