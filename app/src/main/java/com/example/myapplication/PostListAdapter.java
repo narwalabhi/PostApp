@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -22,9 +23,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.squareup.picasso.Picasso;
 
 import java.text.MessageFormat;
@@ -53,7 +56,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final PostViewHolder postViewHolder, int position) {
+    public void onBindViewHolder(@NonNull final PostViewHolder postViewHolder, final int position) {
         final Post post = PostList.get(position);
         postViewHolder.tvUsername.setText(post.getUsername());
         postViewHolder.tvPostTitle.setText(post.getTitle());
@@ -113,8 +116,6 @@ public class PostListAdapter extends RecyclerView.Adapter<PostViewHolder> {
                                 udpateCount(post.getPostId());
                             }
                         });
-
-
             }
         });
         postViewHolder.ibComment.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +124,18 @@ public class PostListAdapter extends RecyclerView.Adapter<PostViewHolder> {
                 Intent intent = new Intent(mContext, CommentActivity.class);
                 intent.putExtra("postID", post.getPostId());
                 mContext.startActivity(intent);
+            }
+        });
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                if (e != null){
+                    Log.d(TAG, "onEvent: " + e.getMessage());
+                    return;
+                }
+                Post post = documentSnapshot.toObject(Post.class);
+                postViewHolder.tvNoOfLikes.setText(MessageFormat.format("{0}", post.getLikeCount()));
+                postViewHolder.tvNoOfComments.setText(MessageFormat.format("{0}", post.getCommentCount()));
             }
         });
     }
