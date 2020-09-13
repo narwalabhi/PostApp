@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.Context;
 import android.content.Intent;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.myapplication.ui.notifications.ProfileFragment;
 import com.google.android.gms.tasks.OnCanceledListener;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -63,6 +67,19 @@ public class PostListAdapter extends RecyclerView.Adapter<PostViewHolder> {
         postViewHolder.tvPostContent.setText(post.getContent());
         postViewHolder.tvNoOfComments.setText(MessageFormat.format("{0}", post.getCommentCount()));
         postViewHolder.tvNoOfLikes.setText(MessageFormat.format("{0}", post.getLikeCount()));
+        postViewHolder.cIvUserProPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction();
+                ProfileFragment profileFragment = new ProfileFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("uID", post.getUserId());
+                profileFragment.setArguments(bundle);
+                transaction.replace(R.id.nav_host_fragment, profileFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
         Picasso.get()
                 .load(post.getPostImageUrl())
                 .resize(60, 60)

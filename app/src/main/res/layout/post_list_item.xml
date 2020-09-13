@@ -37,6 +37,8 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:src="@drawable/ic_account_circle_black_24dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/tvPostUsername"
@@ -136,8 +138,9 @@
                     android:id="@+id/ibComment"
                     android:layout_width="42dp"
                     android:layout_height="42dp"
+                    android:layout_marginStart="4dp"
                     android:src="@drawable/ic_baseline_comment_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvNoOfLikes"
                     app:layout_constraintStart_toEndOf="@+id/tvNoOfLikes"
                     app:layout_constraintTop_toTopOf="@+id/tvNoOfLikes" />
 
@@ -145,26 +148,26 @@
                     android:id="@+id/tvNoOfLikes"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_marginStart="2dp"
+                    android:layout_marginStart="4dp"
                     android:gravity="center"
                     android:text="0"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/ibLike"
                     app:layout_constraintStart_toEndOf="@+id/ibLike"
-                    app:layout_constraintTop_toBottomOf="@+id/tvContent"
+                    app:layout_constraintTop_toTopOf="@+id/ibLike"
                     app:layout_constraintVertical_bias="1.0" />
 
                 <TextView
                     android:id="@+id/tvNoOfComments"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_marginStart="2dp"
+                    android:layout_marginStart="4dp"
                     android:gravity="center"
                     android:text="0"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ibComment"
-                    app:layout_constraintTop_toBottomOf="@+id/tvContent" />
+                    app:layout_constraintTop_toTopOf="@+id/ibComment" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

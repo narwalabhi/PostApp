@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class User {
     private String name;
@@ -10,7 +9,7 @@ public class User {
     private String mobile;
     private String dob;
     private String ProPicName;
-    private List<String> postIds;
+    private ArrayList<String> postIds;
     private int postCount;
 
     public User() {
@@ -27,7 +26,7 @@ public class User {
         this.postCount = 0;
     }
 
-    public List<String> getPostIds() {
+    public ArrayList<String> getPostIds() {
         return postIds;
     }
 
@@ -97,7 +96,7 @@ public class User {
         ProPicName = proPicName;
     }
 
-    public void setPostIds(List<String> postIds) {
+    public void setPostIds(ArrayList<String> postIds) {
         this.postIds = postIds;
     }
 
