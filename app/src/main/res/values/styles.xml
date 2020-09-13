@@ -24,4 +24,10 @@
         <item name="android:textColorHint">#ffffff</item>
     </style>
 
+    <style name="LoginButton" parent="Theme.AppCompat">
+        <item name="android:background">@drawable/get_in_bg</item>
+        <item name="cornerSize">8dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
 </resources>
