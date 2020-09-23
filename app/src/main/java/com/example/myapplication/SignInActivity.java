@@ -1,8 +1,5 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,46 +8,37 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.Objects;
-
-import javax.annotation.Nullable;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "Signin";
     TextInputEditText etEmailSigin;
     TextInputEditText etPasswordSignin;
-    MaterialButton btnSignIn;
-    TextView tvSignup;
+    Button btnSignIn;
+    TextView tvSignUp;
     FirebaseAuth firebaseAuth;
     private String username, imgUrl;
     SharedPreferences loginPrefs;
@@ -67,8 +55,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         etEmailSigin = findViewById(R.id.etEmailSignIn);
         etPasswordSignin = findViewById(R.id.etPasswordSignIn);
         btnSignIn = findViewById(R.id.btnSignIn);
-        tvSignup = findViewById(R.id.tvSignup);
-        tvSignup.setOnClickListener(this);
+        tvSignUp = findViewById(R.id.tvSignup);
+        tvSignUp.setOnClickListener(this);
         btnSignIn.setOnClickListener(this);
     }
 
@@ -82,7 +70,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.tvSignup: {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-                finish();
             }
         }
     }

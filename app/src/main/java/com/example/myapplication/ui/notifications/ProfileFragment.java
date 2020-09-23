@@ -23,15 +23,9 @@ import com.example.myapplication.PostListAdapter;
 import com.example.myapplication.ProfilePostsAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -133,6 +127,5 @@ public class ProfileFragment extends Fragment {
         }
         tvUsername.setText(username);
     }
-
 
 }
