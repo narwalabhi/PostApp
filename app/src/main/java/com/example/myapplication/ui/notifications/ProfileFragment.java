@@ -17,6 +17,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.GridItemDecoration;
+import com.example.myapplication.Post;
+import com.example.myapplication.PostListAdapter;
+import com.example.myapplication.ProfilePostsAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.User;
 import com.google.android.gms.tasks.OnSuccessListener;

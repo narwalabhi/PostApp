@@ -60,4 +60,11 @@ public class HomeActivity extends AppCompatActivity {
         }
         return true;
     }
-}
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            finish();
+        }
+    }}
